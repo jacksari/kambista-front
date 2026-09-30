@@ -1,0 +1,53 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --color-kambista-50: #effcf9;
+  --color-kambista-100: #d7f8f1;
+  --color-kambista-200: #b3efe3;
+  --color-kambista-300: #7fe0d1;
+  --color-kambista-400: #45c8b8;
+  --color-kambista-500: #1bada0;
+  --color-kambista-600: #0d9188;
+  --color-kambista-700: #0d746f;
+  --color-kambista-800: #105d5a;
+  --color-kambista-900: #104d4b;
+  --color-kambista-950: #052f2f;
+
+  --color-primary-50: var(--color-kambista-50);
+  --color-primary-100: var(--color-kambista-100);
+  --color-primary-200: var(--color-kambista-200);
+  --color-primary-300: var(--color-kambista-300);
+  --color-primary-400: var(--color-kambista-400);
+  --color-primary-500: var(--color-kambista-500);
+  --color-primary-600: var(--color-kambista-600);
+  --color-primary-700: var(--color-kambista-700);
+  --color-primary-800: var(--color-kambista-800);
+  --color-primary-900: var(--color-kambista-900);
+  --color-primary-950: var(--color-kambista-950);
+}
+
+:root {
+  color-scheme: light;
+  --ui-primary: var(--color-primary-500);
+  --ui-radius: 0.75rem;
+  --ui-container: 80rem;
+}
+
+html {
+  background-color: var(--ui-bg);
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--ui-bg);
+  color: var(--ui-text);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
