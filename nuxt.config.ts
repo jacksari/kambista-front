@@ -8,7 +8,28 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
 
+  ui: {
+    colorMode: false,
+    fonts: false,
+  },
+
   css: ['~/assets/css/main.css'],
+
+  app: {
+    head: {
+      title: 'Kambista',
+      meta: [
+        {
+          name: 'description',
+          content: 'Cambia tus divisas de forma simple, segura y transparente.',
+        },
+      ],
+    },
+  },
+
+  devServer: {
+    port: 3001,
+  },
 
   devtools: {
     enabled: true,
@@ -24,4 +45,3 @@ export default defineNuxtConfig({
     strict: true,
   },
 })
-
