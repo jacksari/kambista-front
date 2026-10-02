@@ -11,7 +11,9 @@
     "generate": "nuxt generate",
     "lint": "eslint .",
     "postinstall": "nuxt prepare",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.137",
@@ -24,6 +26,10 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.17.0",
-    "eslint": "^10.11.0"
+    "@nuxt/test-utils": "^4.3.2",
+    "@vue/test-utils": "^2.5.1",
+    "eslint": "^10.11.0",
+    "happy-dom": "^20.14.5",
+    "vitest": "^4.1.11"
   }
 }
