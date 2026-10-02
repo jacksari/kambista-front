@@ -6,6 +6,20 @@ interface ApiErrorData {
 interface ApiErrorLike {
   data?: ApiErrorData
   message?: string
+  response?: {
+    status?: number
+  }
+  status?: number
+  statusCode?: number
+}
+
+export function getApiErrorStatus(error: unknown) {
+  if (!error || typeof error !== 'object') {
+    return undefined
+  }
+
+  const apiError = error as ApiErrorLike
+  return apiError.statusCode || apiError.status || apiError.response?.status
 }
 
 export function getApiErrorMessage(

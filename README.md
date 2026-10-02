@@ -43,3 +43,9 @@ El codigo fuente vive en `src/` y se organiza por funcionalidades. Los component
 ## Autenticación
 
 La sesión utiliza el token retornado por `POST /auth/login` o `POST /auth/register`. Después de recibirlo, el cliente consulta `GET /auth/profile` para obtener al usuario autenticado. Al recargar una ruta protegida, el middleware valida nuevamente el token contra el perfil.
+
+## Transacciones
+
+La ruta principal protegida permite consultar el historial por rango de fechas, paginar resultados y registrar una nueva operación. El modal obtiene el tipo de cambio vigente desde `GET /exchange-rates/current`, muestra una estimación y confirma la operación mediante `POST /transactions`.
+
+Cuando el perfil autenticado tiene el rol `admin`, el filtro muestra los usuarios obtenidos desde `GET /users` y permite consultar su historial enviando `userId`. Para usuarios con rol `user`, el selector no se renderiza y el parámetro nunca se envía.

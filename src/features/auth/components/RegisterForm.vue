@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import AuthCard from './AuthCard.vue'
-import PasswordRequirements from './PasswordRequirements.vue'
 import { useRegister } from '../composables/use-register'
 import { registerSchema } from '../validation/register.schema'
 
@@ -85,8 +84,6 @@ const {
             />
           </template>
         </UInput>
-
-        <PasswordRequirements :password="state.password" />
       </UFormField>
 
       <UButton

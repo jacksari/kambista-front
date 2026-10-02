@@ -1,32 +1,24 @@
 import { defineStore } from 'pinia'
 import type {
   AuthResponse,
-  AuthUser,
   LoginRequest,
   RegisterRequest,
 } from '~/types/auth.types'
+import { useAuthSession } from '~/composables/use-auth-session'
 import { useAuthService } from '~/services/auth.service'
 
 export const useAuthStore = defineStore('auth', () => {
   const authService = useAuthService()
-  const accessToken = useCookie<string | null>('kambista_access_token', {
-    default: () => null,
-    maxAge: 60 * 60 * 8,
-    sameSite: 'lax',
-    secure: import.meta.env.PROD,
-  })
-
-  const user = ref<AuthUser | null>(null)
-  const initialized = ref(false)
+  const {
+    accessToken,
+    user,
+    initialized,
+    setAccessToken,
+    clearSession,
+  } = useAuthSession()
   const profilePending = ref(false)
 
   const isAuthenticated = computed(() => Boolean(accessToken.value && user.value))
-
-  function clearSession() {
-    accessToken.value = null
-    user.value = null
-    initialized.value = true
-  }
 
   async function fetchProfile() {
     if (!accessToken.value) {
@@ -37,8 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
     profilePending.value = true
 
     try {
-      user.value = await authService.profile(accessToken.value)
-      console.log('User:', user.value)
+      user.value = await authService.profile()
       initialized.value = true
       return user.value
     } catch (error) {
@@ -50,7 +41,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function establishSession(response: AuthResponse) {
-    accessToken.value = response.access_token
+    setAccessToken(response.access_token)
     user.value = null
     initialized.value = false
 
@@ -65,6 +56,10 @@ export const useAuthStore = defineStore('auth', () => {
   async function register(input: RegisterRequest) {
     const response = await authService.register(input)
     return await establishSession(response)
+  }
+
+  function logout() {
+    clearSession()
   }
 
   async function restoreSession() {
@@ -84,10 +79,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function logout() {
-    clearSession()
-  }
-
   return {
     accessToken,
     user,
@@ -97,7 +88,7 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     register,
     fetchProfile,
-    restoreSession,
     logout,
+    restoreSession,
   }
 })

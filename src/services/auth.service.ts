@@ -24,12 +24,9 @@ export function useAuthService() {
       })
     },
 
-    profile(accessToken: string) {
+    profile() {
       return http<ProfileResponse>('/auth/profile', {
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       })
     },
   }
